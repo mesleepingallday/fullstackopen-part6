@@ -7,9 +7,16 @@ export function ActionCreators(dispatch) {
   });
   const doSort = () => ({ type: "SORT" });
 
-  const { vote, addAnecdote, sortVote } = bindActionCreators(
-    { vote: doVote, addAnecdote: doAddAnecdote, sortVote: doSort },
+  const doFilter = (filter) => ({ type: "FILTER", data: filter });
+
+  const { vote, addAnecdote, sortVote, filter } = bindActionCreators(
+    {
+      vote: doVote,
+      addAnecdote: doAddAnecdote,
+      sortVote: doSort,
+      filter: doFilter,
+    },
     dispatch
   );
-  return { vote, addAnecdote, sortVote };
+  return { vote, addAnecdote, sortVote, filter };
 }
