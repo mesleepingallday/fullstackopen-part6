@@ -1,8 +1,11 @@
 import { useDispatch, useSelector } from "react-redux";
 import { ActionCreators } from "../actionCreators";
+import { useEffect } from "react";
+import anecdoteService from "../services/anecdotes";
 export default function AnecdoteList() {
   const dispatch = useDispatch();
-  const { vote, sort, setNotification } = ActionCreators(dispatch);
+  const { vote, sort, setNotification, setAnecdotes } =
+    ActionCreators(dispatch);
   const { anecdotes, filter } = useSelector((state) => state);
   const filteredAnecdotes = anecdotes.filter((anecdote) =>
     anecdote.content?.toLowerCase().includes(filter.toLowerCase())
@@ -13,6 +16,11 @@ export default function AnecdoteList() {
     vote({ id });
     sort();
   };
+  useEffect(() => {
+    anecdoteService.getAll().then((anecdotes) => {
+      setAnecdotes(anecdotes);
+    });
+  }, []);
   return (
     <div>
       {filteredAnecdotes.map((anecdote) => (

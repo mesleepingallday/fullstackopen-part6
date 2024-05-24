@@ -1,5 +1,11 @@
 import { bindActionCreators } from "redux";
-import { vote, addAnecdote, sort } from "./reducers/anecdoteReducer";
+import {
+  vote,
+  addAnecdote,
+  sort,
+  setAnecdotes,
+  appendAnecdote,
+} from "./reducers/anecdoteReducer";
 import { setFilter } from "./reducers/filterReducer";
 import {
   setNotification,
@@ -15,6 +21,8 @@ export function ActionCreators(dispatch) {
       setFilter,
       setNotification,
       clearNotification,
+      setAnecdotes,
+      appendAnecdote,
     },
     dispatch
   );
