@@ -1,15 +1,17 @@
 import { useDispatch, useSelector } from "react-redux";
 import { ActionCreators } from "../actionCreators";
 export default function AnecdoteList() {
+  const dispatch = useDispatch();
+  const { vote, sort, setNotification } = ActionCreators(dispatch);
   const { anecdotes, filter } = useSelector((state) => state);
   const filteredAnecdotes = anecdotes.filter((anecdote) =>
-    anecdote.content.toLowerCase().includes(filter.toLowerCase())
+    anecdote.content?.toLowerCase().includes(filter.toLowerCase())
   );
-  const dispatch = useDispatch();
-  const { vote, sortVote } = ActionCreators(dispatch);
   const voteHandler = (id) => {
-    vote(id);
-    sortVote();
+    const anecdote = anecdotes.find((anecdote) => anecdote.id === id);
+    setNotification(`you voted '${anecdote.content}'`);
+    vote({ id });
+    sort();
   };
   return (
     <div>

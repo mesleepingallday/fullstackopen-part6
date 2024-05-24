@@ -1,12 +1,12 @@
 import { useDispatch } from "react-redux";
 import { ActionCreators } from "../actionCreators";
+
 const Filter = () => {
   const dispatch = useDispatch();
-  const { filter } = ActionCreators(dispatch);
+  const { setFilter } = ActionCreators(dispatch);
   const handleChange = (event) => {
-    // input-field value is in variable event.target.value
     const searchContent = event.target.value;
-    filter(searchContent);
+    setFilter(searchContent);
   };
   const style = {
     marginBottom: 10,
